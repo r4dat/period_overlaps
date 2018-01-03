@@ -23,6 +23,10 @@ def overlap_test(a,b):
     _b_check = isinstance(b, DateRange)
     if not (_a_check or _b_check):
         raise TypeError("a or b not a DateRange object")
+
+    if (a.end < b.begin) or (b.end<a.begin):
+        return False
+
     print('stub')
     raise NotImplementedError
     return False
