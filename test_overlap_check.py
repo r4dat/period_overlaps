@@ -18,19 +18,34 @@ def test_overlap_check_types(a,b):
     with pytest.raises(TypeError):
         overlap_test(a,b)
 
-def test_disjoint():
+disjoint_data = [( DateRange(date(2017,1,1),date(2017,2,1)), DateRange(date(2017,2,5),date(2017,3,7)) ),
+                 ( DateRange(date(2017,2,5),date(2017,3,7)), DateRange(date(2017,1,1),date(2017,2,1)) )]
+
+@pytest.mark.parametrize("a,b",disjoint_data)
+def test_disjoint(a,b):
     ## A < B
     ## B < A
-    a = DateRange(date(2017,1,1),date(2017,2,1))
-    b = DateRange(date(2017,2,5),date(2017,3,7))
     assert overlap_test(a,b)==False
     assert overlap_test(b,a)==False
 
-def test_partial():
-    assert True
+partial_data = [( DateRange(date(2017,1,1),date(2017,3,1)), DateRange(date(2017,2,5),date(2017,9,7)) ),
+                ( DateRange(date(2017,2,5),date(2017,9,7)), DateRange(date(2017,1,1),date(2017,3,1)) )]
 
-def test_subset():
-    assert True
+@pytest.mark.parametrize("a,b",partial_data)
+def test_partial(a,b):
+    assert overlap_test(a,b) == True
+    assert overlap_test(b,a) == True
+
+
+subset_data = [( DateRange(date(2017,1,1),date(2017,12,1)), DateRange(date(2017,2,5),date(2017,3,7)) ),
+               ( DateRange(date(2017,1,5),date(2017,3,7)), DateRange(date(2017,1,1),date(2017,12,1)) )]
+@pytest.mark.parametrize("a,b",subset_data)
+def test_subset(a,b):
+    assert overlap_test(a,b) == True
+    assert overlap_test(b,a) == True
 
 def test_identical():
-    assert True
+    a = DateRange(date(2017, 1, 1), date(2017, 2, 1))
+    b = DateRange(date(2017, 1, 1), date(2017, 2, 1))
+    assert overlap_test(a,b)==True
+    assert overlap_test(b,a)==True
