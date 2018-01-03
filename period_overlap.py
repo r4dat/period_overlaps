@@ -16,8 +16,6 @@ class DateRange():
         self.begin = begin
         self.end = end
 
-a = Date_Range(begin = date(2017,1,1),end = date(2017,2,1))
-b = Date_Range(begin = date(2017,1,15),end = date(2017,5,1))
 
 def overlap_test(a,b):
     print('stub')
