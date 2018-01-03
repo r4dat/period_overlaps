@@ -2,7 +2,6 @@
 # 2018-01-02
 
 from datetime import date
-from collections import namedtuple
 
 class DateRange():
     def __init__(self,begin,end):
