@@ -1,6 +1,5 @@
 import pytest
 
-
 def test_disjoint():
     assert False
 
