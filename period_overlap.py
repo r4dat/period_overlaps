@@ -18,6 +18,11 @@ class DateRange():
 
 
 def overlap_test(a,b):
+    # Instance using DateRange object
+    _a_check = isinstance(a, DateRange)
+    _b_check = isinstance(b, DateRange)
+    if not (_a_check or _b_check):
+        raise TypeError("a or b not a DateRange object")
     print('stub')
     raise NotImplementedError
     return False
