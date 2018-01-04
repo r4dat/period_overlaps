@@ -26,8 +26,8 @@ disjoint_data = [(DateRange(date(2017, 1, 1), date(2017, 2, 1)), DateRange(date(
 
 @pytest.mark.parametrize("a,b", disjoint_data)
 def test_disjoint(a, b):
-    ## A < B
-    ## B < A
+    #  ___
+    #        ---
     assert overlap_test(a, b) == False
     assert overlap_test(b, a) == False
 
@@ -38,6 +38,8 @@ partial_data = [(DateRange(date(2017, 1, 1), date(2017, 3, 1)), DateRange(date(2
 
 @pytest.mark.parametrize("a,b", partial_data)
 def test_partial(a, b):
+    # ______
+    #     -----
     assert overlap_test(a, b) == True
     assert overlap_test(b, a) == True
 
@@ -48,11 +50,15 @@ subset_data = [(DateRange(date(2017, 1, 1), date(2017, 12, 1)), DateRange(date(2
 
 @pytest.mark.parametrize("a,b", subset_data)
 def test_subset(a, b):
+    # ____________
+    #     -----
     assert overlap_test(a, b) == True
     assert overlap_test(b, a) == True
 
 
 def test_identical():
+    # ____
+    # ----
     a = DateRange(date(2017, 1, 1), date(2017, 2, 1))
     b = DateRange(date(2017, 1, 1), date(2017, 2, 1))
     assert overlap_test(a, b) == True
